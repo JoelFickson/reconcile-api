@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./types",
     "target": "es2019",
     "sourceMap": true,
     "module": "commonjs",
