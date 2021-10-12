@@ -41,12 +41,42 @@ describe("Controller/ Reconcile", () => {
             .field('extra_info', '{"in":"case you want to send json along with your file"}')
             .attach('fileOne', __dirname + `/sample/clientmarkofffile20140114.csv`)
             .attach('fileTwo', __dirname + `/sample/clientmarkofffile20140114.csv`)
-            .end(function (err:any, res: any) {
+            .end(function (err: any, res: any) {
 
                 console.log(res);
                 console.log(err);
 
             });
+
+
+    });
+
+
+});
+describe("Check System Status", () => {
+    let mockRequest: Partial<Request>;
+    let mockResponse: Partial<Response>;
+    let responseObject = {};
+
+    beforeEach(() => {
+        mockRequest = {};
+        mockResponse = {
+            statusCode: 0,
+            send: jest.fn().mockImplementation((result) => {
+                responseObject = result;
+            })
+        };
+    });
+
+    test('return system is up & running', async () => {
+
+        const expectedStatusCode = 400;
+        const expectedReponse = {message: 'The microservice is up and running'}
+
+        await reconcileTransactions(mockRequest as Request, mockResponse as Response);
+
+        expect(mockResponse.statusCode).toBe(expectedStatusCode);
+        expect(responseObject).toEqual(expectedReponse);
 
 
     });
