@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 const serverParams = {
-    port: 8080,
+    port: process.env.PORT || 8080,
     hostName: "localhost"
 }
 
